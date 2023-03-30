@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+#define MAX_SIZE 10
+
+struct List {
+    int elemento[MAX_SIZE];
+    int tamanho;
+};
+
+void insere(struct List *l, int valor, int chave)
+{
+    //verificar se a lista está vazia
+    if(l->tamanho >= MAX_SIZE){
+        printf("\nA lista esta cheia!");
+        return;
+    }    
+    if (chave<0 || chave > l->tamanho){
+        printf("Chave invalida");
+        return;
+    }
+    for(int i=l->tamanho-1; i>=chave; i--){
+        l->elemento[i+1] = l->elemento[i];
+    }
+    l->elemento[chave] = valor;
+    l->tamanho++;
+};
+
+void cria_lista(struct List *lista){
+    lista->tamanho = 0;
+}
+
+void remove(struct List *l, int chave){
+
+    //TO DO: Verificar se a lista esta vazia
+
+    if(chave<0 || chave >= l->tamanho) {
+        printf("Chave invalida");
+        return;
+    }
+
+    for (int i=chave; i<l->tamanho-1;i++){
+        l->elemento[i] = l->elemento[i+1];
+    }
+    l->tamanho--;
+}
+
+void imprime(struct List l){
+    //TO DO: fazer a impressao da lista
+}
+
+int main() {
+    struct List lista;
+
+    cria_lista(&lista);
+
+    insere(&lista, 1, 0);
+    insere(&lista, 2, 1);
+    insere(&lista, 3, 2);
+    imprime(lista);
+
+    remove(&lista, 1);
+    imprime(lista);
+
+    return 0;
+}
